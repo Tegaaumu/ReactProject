@@ -1,130 +1,77 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-
-const pizzaData = [
-  {
-    name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
-    price: 6,
-    photoName: "pizzas/focaccia.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
-    price: 10,
-    photoName: "pizzas/margherita.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-    price: 12,
-    photoName: "pizzas/spinaci.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
-    price: 12,
-    photoName: "pizzas/funghi.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
-    price: 15,
-    photoName: "pizzas/salamino.jpg",
-    soldOut: true,
-  },
-  {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    photoName: "pizzas/prosciutto.jpg",
-    soldOut: false,
-  },
-];
 
 function App() {
+  const style = { border: "3px solid black", width: "400px", height: "800px" };
   return (
-    <div className="container">
-      {/* <h1>Hello React!!!</h1> */}
-      <Header />
-      <Menu />
-      <Footer />
+    <div style={style}>
+      {/* <h2>We place our component here</h2> */}
+      <ImageSection />
+      <Content
+        tilte="Jonas Schmedtmann"
+        content="I can write long sentences so i had to do this instead repeatedly.I can write long sentences so i had to do this instead repeatedly.I can write long sentences so i had to do this instead repeatedly.I can write long sentences so i had to do this instead repeatedly.I can write long sentences so i had to do this instead repeatedly."
+      />
+      <AllUniqueTitle />
     </div>
   );
 }
 
-function Header() {
-  //   const bestWayOut = {
-  //     color: "red",
-  //     fontSize: "40px",
-  //     textTransform: "uppercase",
-  //   };
-
-  const bestWayOut = {};
+function ImageSection() {
   return (
-    <header className="header">
-      <h1 style={bestWayOut}>Fast React Pizza Co.</h1>;
-    </header>
-  );
-}
-function Menu() {
-  return (
-    <main className="menu">
-      <h2>Our menu</h2>
-      <Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, and pepperon"
-        photoName="pizzas/spinaci.jpg"
-        price={10}
+    <div style={{ width: "100%" }}>
+      <img
+        style={{ width: "400px", backgroundSize: "contain" }}
+        src="pizzas/funghi.jpg"
+        alt="Developer Name"
       />
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mozarella, mushrooms, and onion"
-        photoName="pizzas/funghi.jpg"
-        price={12}
-      />
-    </main>
-  );
-}
-function Footer() {
-  const hour = new Date().getHours();
-  const openHour = 12;
-  const closeHour = 22;
-  const isOpen = hour >= openHour && hour <= closeHour;
-  console.log(isOpen);
-
-  //   if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
-  //   else alert("sorry We're closed");
-  return (
-    <footer className="footer">
-      {" "}
-      {new Date().toLocaleDateString()} We're currently open!
-    </footer>
-  );
-  //older version
-  // return React.createElement('footer', null, "we're currently open!")
-}
-
-function Pizza(props) {
-  console.log(props);
-  return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name}></img>
-      <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
-      </div>
     </div>
   );
 }
 
-//React v18
+function Content(props) {
+  return (
+    <div style={{ padding: "30px" }}>
+      <h1>{props.tilte}</h1>
+      <p>{props.content}</p>
+    </div>
+  );
+}
+function AllUniqueTitle() {
+  return (
+    <div style={{ padding: "0px 30px" }}>
+      <UniqueTitle title="HTML+CSS" emoji="🧵" color="#123456" />
+      <UniqueTitle title="React" emoji="💪" color="orangered" />
+      <UniqueTitle title="Javascript" emoji="🤩" color="yellow" />
+      <UniqueTitle title="Svelte" emoji="🤔" color="orange" />
+    </div>
+  );
+}
+
+function UniqueTitle(props) {
+  // const color = {props.color};
+  // style={{
+  //   backgroundColor: "red",
+  //   padding: "7px",
+  //   borderRadius: "5px",
+  //   marginLeft: "10px",
+  // }}
+
+  return (
+    <div
+      style={{
+        display: "inline-block",
+        padding: "7px",
+        marginLeft: "7px",
+        borderRadius: "5px",
+        backgroundColor: props.color,
+      }}
+    >
+      <span style={{ marginRight: "10px" }}>{props.title}</span>
+      <span>{props.emoji}</span>
+    </div>
+  );
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -132,6 +79,3 @@ root.render(
     <App />
   </React.StrictMode>,
 );
-
-//React before v18
-// React.render(<App />, document.getElementById("root"));
