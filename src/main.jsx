@@ -79,7 +79,7 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {/* //The below is the first approach but not the best */}
           {/* {pizzaData.map(pizza => 
@@ -94,6 +94,8 @@ function Menu() {
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We're still working on our menu. Please come ack later :</p>
       )}
 
       {/* <Pizza
@@ -122,11 +124,15 @@ function Footer() {
   //   else alert("sorry We're closed");
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>We're open until {closeHour}:00. Come visit us or order online.</p>
           <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
       )}
       {/* {new Date().toLocaleTimeString()} We're currently open! */}
     </footer>
