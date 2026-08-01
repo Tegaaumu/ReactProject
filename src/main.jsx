@@ -135,7 +135,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <Order closeHour={closeHour}/>
+        <Order closeHour={closeHour} openHour={openHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour}:00 and {closeHour}:00.
@@ -148,19 +148,24 @@ function Footer() {
   // return React.createElement('footer', null, "we're currently open!")
 }
 
-function Order(props) {
-    return(
-        <div className="order">
-          <p>We're open until {props.closeHour}:00. Come visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
-    )
+function Order({ closeHour, openHour, test }) {
+  //note there is no value passed to test
+  //console.log(test);
+  return (
+    <div className="order">
+      <p>
+        We're open until {closeHour}:00. Come visit us or order online. {test}
+      </p>
+
+      <button className="btn">Order</button>
+    </div>
+  );
 }
 
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
 
-  if (props.pizzaObj.soldOut) return null;
+  if (pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
@@ -173,11 +178,11 @@ function Pizza(props) {
       </div> */}
 
       {/* //The below is the best approach when mapping */}
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name}></img>
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </li>
   );
