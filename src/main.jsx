@@ -172,10 +172,10 @@ function Order({ closeHour, openHour, test }) {
 function Pizza({ pizzaObj }) {
   console.log(pizzaObj);
 
-  if (pizzaObj.soldOut) return null;
+  //   if (pizzaObj.soldOut) return null;
 
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       {/* //The below is the first approach but not the best when mapping */}
       {/* <img src={props.photoName} alt={props.name}></img>
       <div>
@@ -189,7 +189,7 @@ function Pizza({ pizzaObj }) {
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
       </div>
     </li>
   );
