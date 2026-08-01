@@ -79,21 +79,28 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {/* //The below is the first approach but not the best */}
-          {/* {pizzaData.map(pizza => 
-                <Pizza 
-                name={pizza.name} 
-                photoName={pizza.photoName} 
-                ingredients={pizza.ingredients}
-                price={pizza.price}/>)} */}
 
-          {/* //Below is the best approachwhen mapping */}
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+      {numPizzas > 0 ? (
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {/* //The below is the first approach but not the best */}
+            {/* {pizzaData.map(pizza => 
+                    <Pizza 
+                    name={pizza.name} 
+                    photoName={pizza.photoName} 
+                    ingredients={pizza.ingredients}
+                    price={pizza.price}/>)} */}
+
+            {/* //Below is the best approachwhen mapping */}
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu. Please come ack later :</p>
       )}
