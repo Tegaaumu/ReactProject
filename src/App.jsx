@@ -22,13 +22,18 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(true);
 
   function handlePrevious() {
-    if (step > 1) setStep(step - 1);
+    //old
+    // if (step > 1) setStep(step - 1);
+    //updated/lastest
+    if (step > 1) setStep((s) => s - 1);
   }
   function handleNext() {
     // the below is wrong
     // step = step + 1;
     //Good practise
-    if (step < 3) setStep(step + 1);
+    if (step < 3) {
+      setStep((s) => s + 1);
+    }
     //Bad practise
     // test.name = "Tega";
     //Good practice
