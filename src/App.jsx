@@ -16,12 +16,21 @@ const messages = [
 export default function App() {
   // const step = 2;
   const [step, setStep] = useState(1);
+  // below is wrong
+  const [test, setTest] = useState({ name: "Jonas" });
 
   function handlePrevious() {
     if (step > 1) setStep(step - 1);
   }
   function handleNext() {
+    // the below is wrong
+    // step = step + 1;
+    //Good practise
     if (step < 3) setStep(step + 1);
+    //Bad practise
+    // test.name = "Tega";
+    //Good practice
+    setTest({ name: "Fred" });
   }
 
   return (
@@ -34,6 +43,7 @@ export default function App() {
 
       <p className="message">
         Step {step}: {messages[step - 1]}
+        {test.name}
       </p>
       <div className="buttons">
         <button
