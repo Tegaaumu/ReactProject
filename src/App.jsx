@@ -1,8 +1,11 @@
 // we place message out sode App function so that its will not be rendered everytime the App function is called.
 
+import { useState } from "react";
+
 // note this two thing are different.
 //onMouseEnter={alert("test")}
 //onMouseEnter={() => alert("test")}
+//useState(1) is an hook. anything that start with `use` is a hook. it can only be called at top(first) imediately after the function.
 
 const messages = [
   "Learn React ⚛️",
@@ -11,19 +14,20 @@ const messages = [
 ];
 
 export default function App() {
-  const step = 2;
+  // const step = 2;
+  const [step, setStep] = useState(1);
 
   function handlePrevious() {
-    alert("Preious");
+    if (step > 1) setStep(step - 1);
   }
   function handleNext() {
-    alert("Next");
+    if (step < 3) setStep(step + 1);
   }
 
   return (
     <div className="steps">
       <div className="numbers">
-        <div className={`${step >= 1 ? "active" : ""}`}>1</div>
+        <div className={step >= 1 ? "active" : ""}>1</div>
         <div className={`${step >= 2 ? "active" : ""}`}>2</div>
         <div className={`${step >= 3 ? "active" : ""}`}>3</div>
       </div>
@@ -34,7 +38,7 @@ export default function App() {
       <div className="buttons">
         <button
           style={{ backgroundColor: "#7950f2", color: "#fff" }}
-          onClick={() => alert("Previous")}
+          onClick={handlePrevious}
         >
           Previous
         </button>
