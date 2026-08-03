@@ -1,5 +1,9 @@
 // we place message out sode App function so that its will not be rendered everytime the App function is called.
 
+// note this two thing are different.
+//onMouseEnter={alert("test")}
+//onMouseEnter={() => alert("test")}
+
 const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
@@ -8,6 +12,14 @@ const messages = [
 
 export default function App() {
   const step = 2;
+
+  function handlePrevious() {
+    alert("Preious");
+  }
+  function handleNext() {
+    alert("Next");
+  }
+
   return (
     <div className="steps">
       <div className="numbers">
@@ -15,14 +27,21 @@ export default function App() {
         <div className={`${step >= 2 ? "active" : ""}`}>2</div>
         <div className={`${step >= 3 ? "active" : ""}`}>3</div>
       </div>
+
       <p className="message">
         Step {step}: {messages[step - 1]}
       </p>
       <div className="buttons">
-        <button style={{ backgroundColor: "#7950f2", color: "#fff" }}>
+        <button
+          style={{ backgroundColor: "#7950f2", color: "#fff" }}
+          onClick={() => alert("Previous")}
+        >
           Previous
         </button>
-        <button style={{ backgroundColor: "#7950f2", color: "#fff" }}>
+        <button
+          style={{ backgroundColor: "#7950f2", color: "#fff" }}
+          onClick={handleNext}
+        >
           Next
         </button>
       </div>
