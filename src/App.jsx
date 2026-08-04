@@ -14,6 +14,15 @@ const messages = [
 ];
 
 export default function App() {
+  return (
+    <div>
+      <Steps />
+      <Steps />
+    </div>
+  );
+}
+
+function Steps() {
   // const step = 2;
   const [step, setStep] = useState(1);
   // below is wrong
@@ -41,7 +50,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <div>
       <button className="close" onClick={() => setIsOpen(!isOpen)}>
         &times;
       </button>
@@ -73,6 +82,6 @@ export default function App() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
