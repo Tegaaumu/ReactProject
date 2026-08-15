@@ -17,7 +17,18 @@ export default function App() {
   return (
     <div>
       <Steps />
-      <Steps />
+      <StepMessage step={1}>
+        <p>Pass in content</p>
+        <p>💼🧵</p>
+      </StepMessage>
+      <StepMessage step={2}>
+        <p>Read children prop</p>
+        <p>🫡🙇</p>
+      </StepMessage>
+      <StepMessage step={3}>
+        <p>Pass in content</p>
+        <p>🧵🫡</p>
+      </StepMessage>
     </div>
   );
 }
@@ -62,10 +73,21 @@ function Steps() {
             <div className={`${step >= 3 ? "active" : ""}`}>3</div>
           </div>
 
-          <p className="message">
-            Step {step}: {messages[step - 1]}
-            {/* {test.name} */}
-          </p>
+          {/* eg of child props */}
+          <StepMessage step={step}>
+            {messages[step - 1]}
+            <div className="buttons">
+              <Button
+                textColor="#333"
+                bgColor="#e7e7e7"
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
+              >
+                Kearn how
+              </Button>
+            </div>
+          </StepMessage>
+          {/* eg of child props */}
+
           <div className="buttons">
             <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
               Previous <span>👈</span>
@@ -77,6 +99,17 @@ function Steps() {
         </div>
       )}
     </div>
+  );
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <p className="message">
+      <h3> Step {step}: </h3>
+      {children}
+      {/* {messages[step - 1]} */}
+      {/* {test.name} */}
+    </p>
   );
 }
 
