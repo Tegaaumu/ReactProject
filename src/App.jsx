@@ -1,50 +1,93 @@
-import { useState } from "react";
-import Logo from "./componenet/Logo";
-import Form from "./componenet/Form";
-import { PackingList } from "./componenet/PackingList";
-import { Stats } from "./componenet/Stats";
+// we place message out sode App function so that its will not be rendered everytime the App function is called.
 
-// const initialItems = [
-//   { id: 1, description: "Passports", quantity: 2, packed: false },
-//   { id: 2, description: "Socks", quantity: 12, packed: true },
-//   { id: 3, description: "Charger", quantity: 12, packed: false },
-// ];
+import { useState } from "react";
+
+// note this two thing are different.
+//onMouseEnter={alert("test")}
+//onMouseEnter={() => alert("test")}
+//useState(1) is an hook. anything that start with `use` is a hook. it can only be called at top(first) imediately after the function.
+
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
 
 export default function App() {
-  // const [items, setItems] = useState(initialItems);
-  const [items, setItems] = useState([]);
-  //how not to do it.
-
-  function handleAddItems(item) {
-    setItems((items) => [...items, item]);
-  }
-  function handleDeleteItems(id) {
-    setItems((items) => items.filter((item) => item.id !== id));
-  }
-  function handleToggleItem(id) {
-    setItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, packed: !item.packed } : item,
-      ),
-    );
-  }
-  function handleClearList() {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete all items?",
-    );
-    if (confirmed) setItems([]);
-  }
   return (
-    <div className="app">
-      <Logo />
-      <Form onAddItems={handleAddItems} />
-      <PackingList
-        items={items}
-        onDeleteItem={handleDeleteItems}
-        onToggleItem={handleToggleItem}
-        onClearList={handleClearList}
-      />
-      <Stats items={items} />
+    <div>
+      <Steps />
+      <Steps />
     </div>
+  );
+}
+
+function Steps() {
+  // const step = 2;
+  const [step, setStep] = useState(1);
+  // below is wrong
+  // const [test, setTest] = useState({ name: "Jonas" });
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  function handlePrevious() {
+    //old
+    // if (step > 1) setStep(step - 1);
+    //updated/lastest
+    if (step > 1) setStep((s) => s - 1);
+  }
+  function handleNext() {
+    // the below is wrong
+    // step = step + 1;
+    //Good practise
+    if (step < 3) {
+      setStep((s) => s + 1);
+    }
+    //Bad practise
+    // test.name = "Tega";
+    //Good practice
+    // setTest({ name: "Fred" });
+  }
+
+  return (
+    <div>
+      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+        &times;
+      </button>
+      {isOpen && (
+        <div className="steps">
+          <div className="numbers">
+            <div className={step >= 1 ? "active" : ""}>1</div>
+            <div className={`${step >= 2 ? "active" : ""}`}>2</div>
+            <div className={`${step >= 3 ? "active" : ""}`}>3</div>
+          </div>
+
+          <p className="message">
+            Step {step}: {messages[step - 1]}
+            {/* {test.name} */}
+          </p>
+          <div className="buttons">
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
+              Previous <span>👈</span>
+            </Button>
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handleNext}>
+              Next <span>👉</span>
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Button({ textColor, bgColor, onClick, children }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {children}
+      {/* <span>{emoji}</span> {text} */}
+    </button>
   );
 }
